@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Understand a Solana transaction. Explain failures, follow execution logs and export a diagnostic report locally."
+    />
+    <meta name="theme-color" content="#10171f" />
+    <title>txray | Solana Transaction Autopsy</title>
+    <link rel="icon" href="/mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#inspector">Skip to inspector</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="txray home"
+        ><img src="/mark.svg" width="32" height="32" alt="" />txray<span
+          >Solana Transaction Autopsy</span
+        ></a
+      >
+      <nav aria-label="Main">
+        <a href="/" aria-current="page">Inspector</a><a href="/guide">Guide</a
+        ><a href="/architecture">Architecture</a>
+      </nav>
+    </header>
+    <main id="inspector">
+      <section class="entry" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="section-label">Read-only transaction inspector</p>
+          <h1 id="page-title">See where it went wrong.</h1>
+          <p>
+            One signature. The outcome, the fee and the execution behind it.
+          </p>
+        </div>
+        <form id="inspect-form" novalidate>
+          <div class="signature-field">
+            <label for="signature">Transaction signature</label
+            ><input
+              id="signature"
+              name="signature"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              maxlength="88"
+              placeholder="Paste a Solana transaction signature…"
+              aria-describedby="privacy"
+            />
+          </div>
+          <div class="network-field">
+            <label for="network">Network</label
+            ><select id="network" name="network">
+              <option value="mainnet-beta">Mainnet</option>
+              <option value="devnet">Devnet</option>
+            </select>
+          </div>
+          <button class="primary" type="submit">Inspect transaction</button>
+        </form>
+        <p class="privacy" id="privacy">
+          Live lookups send the signature to Solana's public RPC. No wallet or
+          funds needed.
+        </p>
+        <div class="examples">
+          <span>Try an offline example</span>
+          <div id="examples" class="example-buttons"></div>
+        </div>
+      </section>
+      <p id="error" class="error-message" role="alert" hidden></p>
+      <p id="activity" class="activity" role="status" aria-live="polite"></p>
+      <section id="empty" class="empty" aria-labelledby="empty-title">
+        <div class="scan-mark" aria-hidden="true">[ tx ]</div>
+        <h2 id="empty-title">Start with a transaction.</h2>
+        <p>
+          Paste a signature above, or explore an example without a network
+          request.
+        </p>
+        <div class="empty-key">
+          <span>Known errors, explained</span><span>Unknowns stay unknown</span
+          ><span>Export what you find</span>
+        </div>
+      </section>
+      <section id="result" aria-label="Transaction report" hidden>
+        <div class="report-toolbar">
+          <span
+            id="source-label"
+            data-testid="source-label"
+            class="source-label"
+          ></span>
+          <div class="report-actions">
+            <a id="explorer" target="_blank" rel="noopener noreferrer" hidden
+              >View on Explorer</a
+            ><button type="button" id="copy">Copy report</button
+            ><button type="button" id="export">Export JSON</button>
+          </div>
+        </div>
+        <div class="report-grid">
+          <div class="report-main">
+            <section id="diagnosis" class="diagnosis">
+              <p id="outcome" class="outcome"></p>
+              <h2 id="diagnosis-title"></h2>
+              <p id="explanation" data-testid="explanation"></p>
+              <p id="failure-note" class="failure-note" hidden></p>
+            </section>
+            <section class="section-block" aria-labelledby="instructions-title">
+              <div class="section-heading">
+                <h2 id="instructions-title">Instruction timeline</h2>
+                <span id="instruction-count"></span>
+              </div>
+              <p class="section-help">
+                Actions describe what was requested. A failed transaction does
+                not commit ordinary program state changes.
+              </p>
+              <ol id="instructions" class="instructions"></ol>
+            </section>
+            <section class="section-block" aria-labelledby="logs-title">
+              <div class="section-heading">
+                <h2 id="logs-title">Execution log</h2>
+                <span id="log-count"></span>
+              </div>
+              <p class="section-help">
+                Recorded order, with nested calls indented. Per-program compute
+                can overlap; it is not added together.
+              </p>
+              <div
+                id="logs"
+                class="logs"
+                tabindex="0"
+                aria-label="Execution log lines"
+              ></div>
+            </section>
+          </div>
+          <aside class="facts" aria-label="Transaction details">
+            <section>
+              <h2>At a glance</h2>
+              <dl>
+                <dt>Failed instruction</dt>
+                <dd
+                  id="failed-instruction"
+                  data-testid="failed-instruction"
+                ></dd>
+                <dt>Transaction fee</dt>
+                <dd id="fee" data-testid="fee" class="fact-value"></dd>
+                <dt>Compute used</dt>
+                <dd id="compute" data-testid="compute" class="fact-value"></dd>
+                <dt>Top-level failed program</dt>
+                <dd id="failed-program" class="address"></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Fee & compute details</h2>
+              <dl id="resources"></dl>
+              <p class="aside-note">
+                The RPC reports a total fee, not an exact base/priority split.
+                Requested settings are not a fee receipt.
+              </p>
+            </section>
+            <section>
+              <h2>Transaction</h2>
+              <dl id="identity"></dl>
+            </section>
+            <section id="warnings-section">
+              <h2>Data notes</h2>
+              <ul id="warnings" class="warnings"></ul>
+            </section>
+            <details class="raw-error">
+              <summary>Raw runtime error</summary>
+              <pre id="raw-error"></pre>
+            </details>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <footer>
+      Runs on your computer. No saved lookups, telemetry or wallet connection.
+      Public RPC availability varies.
+    </footer>
+  </body>
+</html>

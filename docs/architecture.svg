@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="530" viewBox="0 0 960 530" role="img" aria-labelledby="title desc">
+<title id="title">txray architecture</title><desc id="desc">A local browser sends a transaction signature to a local Express server. The server reads a fixed Solana RPC endpoint, validates the response, and analyzes errors and logs. Results return to the dashboard for copy or JSON export. Offline examples bypass RPC. No data is stored.</desc>
+<rect width="960" height="530" rx="12" fill="#10171f"/>
+<g font-family="Arial,sans-serif" fill="#e3eaf0">
+<text x="36" y="49" font-size="26" font-weight="700">From signature to diagnosis</text>
+<text x="36" y="80" font-size="17" fill="#a2b1bf">Read-only. Local processing. No saved lookups.</text>
+<g fill="#18232d" stroke="#334553"><rect x="36" y="124" width="256" height="112" rx="9"/><rect x="352" y="124" width="256" height="112" rx="9"/><rect x="668" y="124" width="256" height="112" rx="9"/><rect x="352" y="307" width="256" height="112" rx="9"/><rect x="36" y="307" width="256" height="112" rx="9"/><rect x="668" y="307" width="256" height="112" rx="9"/></g>
+<text x="56" y="162" font-size="22" font-weight="700">Local dashboard</text><text x="56" y="191" font-size="16" fill="#a2b1bf">Signature + network</text><text x="56" y="216" font-size="16" fill="#a2b1bf">127.0.0.1:4450</text>
+<text x="372" y="162" font-size="22" font-weight="700">Express server</text><text x="372" y="191" font-size="16" fill="#a2b1bf">Validate input and response</text><text x="372" y="216" font-size="16" fill="#a2b1bf">Timeout, size and lookup caps</text>
+<text x="688" y="162" font-size="22" font-weight="700">Solana public RPC</text><text x="688" y="191" font-size="16" fill="#a2b1bf">Mainnet / Devnet</text><text x="688" y="216" font-size="16" fill="#a2b1bf">getTransaction (confirmed)</text>
+<text x="372" y="347" font-size="22" font-weight="700">Pure analyzer</text><text x="372" y="377" font-size="16" fill="#a2b1bf">Errors, instructions, logs</text><text x="372" y="402" font-size="16" fill="#a2b1bf">Exact fees and compute</text>
+<text x="56" y="347" font-size="22" font-weight="700">Readable report</text><text x="56" y="377" font-size="16" fill="#a2b1bf">Timeline and diagnostics</text><text x="56" y="402" font-size="16" fill="#a2b1bf">Copy text / export JSON</text>
+<text x="688" y="347" font-size="22" font-weight="700">Offline examples</text><text x="688" y="377" font-size="16" fill="#a2b1bf">Fictional records</text><text x="688" y="402" font-size="16" fill="#a2b1bf">Same analyzer, no RPC</text>
+<g stroke="#90c9ee" stroke-width="2" fill="none"><path d="M295 178h50m-9-7 9 7-9 7M611 166h50m-9-7 9 7-9 7M661 198h-50m9-7-9 7 9 7M480 242v57m-7-9 7 9 7-9M345 363h-45m9-7-9 7 9 7M661 363h-45m9-7-9 7 9 7"/></g>
+<text x="36" y="475" font-size="17" fill="#a2b1bf">No wallet, signing, database, cloud deployment or paid API.</text>
+<text x="36" y="502" font-size="17" fill="#a2b1bf">Unknown errors and missing metadata remain visible.</text>
+</g></svg>
