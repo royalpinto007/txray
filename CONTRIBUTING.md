@@ -5,9 +5,12 @@ Use Node.js 22.18+ and npm. Keep the tool read-only, local-first and small.
 ```sh
 npm install
 npm run check
+npm run package:check
 npx playwright install chromium
 npm run test:e2e
 ```
+
+`npm run package:check` installs the built tarball into a clean temporary consumer and tests its actual executable, assets and dependency audit. It needs registry access but never publishes.
 
 `npm run format` formats source and docs. `npm run dev` rebuilds browser assets once and watches the server; rerun `npm run build` after browser or documentation edits.
 

@@ -1,7 +1,6 @@
 {
-  "name": "txray-solana",
+  "name": "txray",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "license": "MIT",
   "description": "A local-first Solana transaction debugger. Follow execution, explain failures and export diagnostics.",
@@ -20,7 +19,9 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "test:e2e": "npm run build && playwright test",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build"
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build",
+    "prepack": "npm run build",
+    "package:check": "npm run build && node scripts/check-package.mjs"
   },
   "dependencies": {
     "express": "^5.3.0",
@@ -41,5 +42,41 @@
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.0"
+  },
+  "bin": {
+    "txray": "dist/cli.js"
+  },
+  "files": [
+    "dist/",
+    "docs/*.md",
+    "docs/*.svg",
+    "docs/screenshot.png",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md",
+    "SECURITY.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royalpinto007/txray.git"
+  },
+  "homepage": "https://www.npmjs.com/package/txray",
+  "bugs": {
+    "url": "https://github.com/royalpinto007/txray/issues"
+  },
+  "keywords": [
+    "solana",
+    "transaction",
+    "debugger",
+    "rpc",
+    "logs",
+    "compute-units",
+    "developer-tools",
+    "cli",
+    "local-first",
+    "typescript"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
