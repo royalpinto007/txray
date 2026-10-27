@@ -1,5 +1,7 @@
 # Using txray
 
+Run `npx txray` with Node.js 22.18+. Open the printed local URL. Use `npx txray --port 4452` if the default port is busy. Press Ctrl+C to stop.
+
 Paste a Solana transaction signature, select its network and choose **Inspect transaction**. A transaction signature is the public identifier of a transaction, not a wallet address.
 
 Start with an **offline example** if you do not have a signature. All example values are fictional. No RPC request is made for an example.

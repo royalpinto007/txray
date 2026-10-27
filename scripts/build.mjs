@@ -1,5 +1,5 @@
 import { build } from "esbuild";
-import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { chmod, cp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { marked } from "marked";
 await mkdir("dist/public", { recursive: true });
 await cp("public", "dist/public", { recursive: true });
@@ -37,3 +37,5 @@ await build({
   outfile: "dist/public/app.js",
   target: "es2022",
 });
+
+await chmod("dist/cli.js", 0o755);

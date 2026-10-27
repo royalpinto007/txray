@@ -6,6 +6,7 @@ The browser asks a local Express server for a transaction. The server queries a 
 
 | Part                       | Responsibility                                                                          |
 | -------------------------- | --------------------------------------------------------------------------------------- |
+| `src/cli.ts`               | npm executable, help, version and local port options                                    |
 | `src/web/app.ts`           | Signature form, diagnostics, timeline, text copy and JSON download                      |
 | `src/app.ts`               | Local HTTP boundary, input checks, security headers and lookup limits                   |
 | `src/adapters/rpc.ts`      | Confirmed JSON RPC reads, exact integers, timeout and response cap                      |
@@ -23,6 +24,8 @@ Live results stay in process memory for the request and in the current browser v
 ## Running and testing
 
 `npm run demo` builds the TypeScript server, bundles the small browser entry and generates the guide and architecture pages. Both pages are available inside the dashboard without a Markdown viewer or internet.
+
+`npx txray` starts the prebuilt server and browser assets from the installed package. Consumers do not need TypeScript or build tools. The npm archive includes only built runtime files, public documentation and the license.
 
 Unit tests cover domain behavior. API tests replace the external fetch boundary, while running real handlers. Browser tests use a local test server and exercise the full form, rendering and export path without a public RPC dependency.
 

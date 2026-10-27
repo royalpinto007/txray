@@ -1,7 +1,9 @@
 # Changelog
 
-## 0.1.0 - 2026-10-26
+## 0.1.0 - 2026-10-27
 
+- Install-and-run npm CLI: `npx txray`, with port, help and version options.
+- Built assets included in the package, with a clean-consumer install test.
 - Read-only confirmed Mainnet and Devnet transaction inspection.
 - Known runtime-error explanations, explicit unknown custom errors and missing-data states.
 - Legacy, v0 lookup-address and v1 transaction-config support.

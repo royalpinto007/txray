@@ -2,18 +2,28 @@
 
 **Solana Transaction Autopsy.** Paste a transaction signature and understand the failure, fee and execution behind it.
 
-![txray explaining a fictional insufficient-funds transaction](docs/screenshot.png)
+```sh
+npx txray
+```
 
-## Run locally
+Requires **Node.js 22.18+**. Open **http://127.0.0.1:4450**, paste a signature and choose Mainnet or Devnet. Or start with a labeled offline example. No wallet, SOL, API key or account needed.
+
+![txray explaining a fictional insufficient-funds transaction](https://raw.githubusercontent.com/royalpinto007/txray/main/docs/screenshot.png)
+
+[Source on GitHub](https://github.com/royalpinto007/txray) · [npm package](https://www.npmjs.com/package/txray)
+
+Use `npx txray --port 4452` for another port. `--help` shows options; `--version` prints the installed version. Press Ctrl+C to stop.
+
+## Run from source
 
 Requires **Node.js 22.18+** and npm.
 
 ```sh
+git clone https://github.com/royalpinto007/txray.git
+cd txray
 npm install
 npm run demo
 ```
-
-Open **http://127.0.0.1:4450**. Paste a signature, select Mainnet or Devnet, and inspect it. Or choose a labeled offline example. No wallet, SOL, API key or account needed.
 
 ## What you get
 
@@ -35,6 +45,7 @@ Guide and architecture pages are also available inside the dashboard, offline.
 
 ```sh
 npm run check
+npm run package:check
 npx playwright install chromium
 npm run test:e2e
 ```
